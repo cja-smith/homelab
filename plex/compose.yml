@@ -8,7 +8,6 @@ services:
       - PGID=${PLEX_GID}
       - TZ=${TZ}
       - VERSION=docker
-      - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
       - /opt/appdata/plex:/config
       - /srv/mergerfs/media/tv:/tv

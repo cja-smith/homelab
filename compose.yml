@@ -2,3 +2,4 @@ name: homelab
 
 include:
   - ./plex/compose.yml
+  - ./qbittorrent/compose.yml

@@ -4,13 +4,13 @@ services:
     container_name: plex
     network_mode: host
     environment:
-      - PUID=${PLEX_UID}
-      - PGID=${PLEX_GID}
+      - PUID=${UID}
+      - PGID=${GID}
       - TZ=${TZ}
       - VERSION=docker
     volumes:
-      - /opt/appdata/plex:/config
-      - /srv/mergerfs/media/tv:/tv
-      - /srv/mergerfs/media/movies:/movies
+      - ${APPDATA_ROOT}/plex:/config
+      - ${MEDIA_ROOT}/tv:/tv
+      - ${MEDIA_ROOT}/movies:/movies
 
     restart: unless-stopped

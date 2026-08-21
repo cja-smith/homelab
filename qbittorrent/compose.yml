@@ -1,8 +1,8 @@
-name: gluetun
 
 services:
   gluetun:
     image: qmcgaw/gluetun
+    restart: unless-stopped
     container_name: qbittorrent-gluetun
     cap_add:
       - NET_ADMIN
@@ -22,6 +22,8 @@ services:
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
       - SERVER_COUNTRIES=${SERVER_COUNTRIES}
       - TZ=${TZ}
+      # Refresh qBittorrent's network session after Gluetun reconnects the VPN.
+      - VPN_UP_COMMAND=/bin/sh -c 'wget -O- -nv --timeout=5 --tries=1 --post-data="" http://127.0.0.1:8080/api/v2/app/shutdown || true'
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
       - UPDATER_PERIOD=${UPDATER_PERIOD:-480h}
@@ -33,6 +35,7 @@ services:
     depends_on:
       gluetun:
         condition: service_healthy
+    restart: unless-stopped
     environment:
       - PUID=${UID}
       - PGID=${GID}
@@ -43,4 +46,3 @@ services:
       - ${APPDATA_ROOT}/qbittorrent:/config
       - ${MEDIA_ROOT}/downloads:/downloads
     stop_grace_period: 10s
-    restart: unless-stopped

@@ -22,8 +22,9 @@ services:
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
       - SERVER_COUNTRIES=${SERVER_COUNTRIES}
       - TZ=${TZ}
-      # Refresh qBittorrent's network session after Gluetun reconnects the VPN.
-      - VPN_UP_COMMAND=/bin/sh -c 'wget -O- -nv --timeout=5 --tries=1 --post-data="" http://127.0.0.1:8080/api/v2/app/shutdown || true'
+      # Requires Web UI > Authentication > Bypass authentication for clients on localhost.
+      # LinuxServer's supervisor restarts the app after this graceful shutdown.
+      - VPN_UP_COMMAND=/bin/sh -c 'wget -O- -nv --timeout=5 --tries=1 --post-data="" http://127.0.0.1:8080/api/v2/app/shutdown'
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
       - UPDATER_PERIOD=${UPDATER_PERIOD:-480h}

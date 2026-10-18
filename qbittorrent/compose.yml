@@ -45,5 +45,5 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - ${APPDATA_ROOT}/qbittorrent:/config
-      - ${MEDIA_ROOT}/downloads:/downloads
+      - ${MEDIA_ROOT}/downloads:/data/downloads
     stop_grace_period: 10s

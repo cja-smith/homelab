@@ -30,12 +30,14 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
     environment:
       PUID: "${UID}"
       PGID: "${GID}"
       TZ: "${TZ}"
     volumes:
       - ${APPDATA_ROOT}/prowlarr:/config
-    ports:
-      - "9696:9696"
     restart: unless-stopped

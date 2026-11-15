@@ -2,6 +2,7 @@ name: homelab
 
 include:
   - ./plex/compose.yml
+  - ./jellyfin/compose.yml
   - ./qbittorrent/compose.yml
   - ./arr/compose.yaml
   - ./dashboard/compose.yml

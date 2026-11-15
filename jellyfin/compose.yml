@@ -1,0 +1,15 @@
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      PUID: "${UID}"
+      PGID: "${GID}"
+      TZ: "${TZ}"
+    volumes:
+      - ${APPDATA_ROOT}/jellyfin:/config
+      - ${MEDIA_ROOT}/tv:/tv:ro
+      - ${MEDIA_ROOT}/movies:/movies:ro
+    ports:
+      - "8096:8096"
+    restart: unless-stopped

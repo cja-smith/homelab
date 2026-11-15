@@ -5,3 +5,4 @@ include:
   - ./qbittorrent/compose.yml
   - ./arr/compose.yaml
   - ./dashboard/compose.yml
+  - ./camera/compose.yml

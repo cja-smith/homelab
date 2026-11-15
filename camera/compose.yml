@@ -1,0 +1,18 @@
+services:
+  go2rtc:
+    image: alexxit/go2rtc:latest
+    container_name: homelab-camera
+    environment:
+      CAMERA_HOST: "${CAMERA_HOST:?Set CAMERA_HOST in the root .env}"
+      CAMERA_PASSWORD: "${CAMERA_PASSWORD:?Set CAMERA_PASSWORD in the root .env}"
+      CAMERA_VIEWER_PASSWORD: "${CAMERA_VIEWER_PASSWORD:?Set CAMERA_VIEWER_PASSWORD in the root .env}"
+    ports:
+      - "1984:1984"
+    volumes:
+      - type: bind
+        source: ./go2rtc.yaml
+        target: /config/go2rtc.yaml
+        read_only: true
+        bind:
+          create_host_path: false
+    restart: unless-stopped

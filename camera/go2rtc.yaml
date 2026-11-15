@@ -1,0 +1,13 @@
+streams:
+  camera: "rtsp://admin:${CAMERA_PASSWORD}@${CAMERA_HOST}:554/11"
+
+api:
+  listen: ":1984"
+  username: admin
+  password: "${CAMERA_VIEWER_PASSWORD}"
+
+# Browser playback uses MSE over the HTTP connection.
+rtsp:
+  listen: ""
+webrtc:
+  listen: ""
